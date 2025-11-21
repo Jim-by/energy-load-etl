@@ -1,5 +1,7 @@
 # Energy Load ETL & Analysis Pipeline
 
+This project simulates a real-world data pipeline for European energy markets — directly relevant to JWM Energia’s trading operations on intraday and day-ahead power exchanges.
+
 ## Description
 ETL pipeline for analyzing 15-minute time series of power grid loads in Germany (DE) and Hungary (HU) from the Open Power System Data (OPSD). Demonstrates core data analyst skills: working with pandas for data manipulation, requests for data retrieval, and matplotlib/seaborn for visualization. The pipeline covers:
 - Automated data downloading from a public source
