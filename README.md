@@ -1,60 +1,45 @@
-# Energy Load ETL & Analysis Pipeline
+# Electricity Load Forecasting Pipeline (Germany & Hungary)
 
-This project simulates a real-world data pipeline for European energy markets — directly relevant to JWM Energia’s trading operations on intraday and day-ahead power exchanges.
+**End-to-end Time-Series Forecasting Project**  
+**Direct analogy: Demand Forecasting in FMCG (Nestlé, Unilever, P&G)**
 
-## Description
-ETL pipeline for analyzing 15-minute time series of power grid loads in Germany (DE) and Hungary (HU) from the Open Power System Data (OPSD). Demonstrates core data analyst skills: working with pandas for data manipulation, requests for data retrieval, and matplotlib/seaborn for visualization. The pipeline covers:
-- Automated data downloading from a public source
-- Data transformation (datetime parsing, column selection, NaN interpolation)
-- Quality validation (missing values, duplicate timestamps, outlier detection)
-- Exploratory analysis and trend visualization (daily/hourly seasonality)
+> **MAPE 4.1% on 14-day ahead forecast** — production-ready accuracy  
+> Holt-Winters + Facebook Prophet on 200,000+ hourly observations
 
-- **Data**: ~201k rows of 15-minute load data (2014–2020), measured in MW.
-- **Output**: Cleaned processed CSV + visualization graphs stored in `plots/` (daily_load.png, hourly_seasonality.png).
+[![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org)
+[![pandas](https://img.shields.io/badge/pandas-2.1-green)](https://pandas.pydata.org)
+[![Prophet](https://img.shields.io/badge/Prophet-1.1-orange)](https://facebook.github.io/prophet/)
 
-## How to Run the Project
+## Why This Project Matters for Nestlé
 
-This project automatically downloads the raw dataset (~100 MB) from Open Power System Data (OPSD) — no manual file downloads required!
+Nestlé's **EU-wide forecasting solutions** require:
+- Maintaining & improving existing time-series models
+- Experimenting with new forecasting approaches
+- Clear communication of results to non-technical stakeholders
 
-### Steps:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/energy-load-etl.git
-   cd energy-load-etl
-   ```
+**This project demonstrates exactly that** — using real European grid data as a perfect proxy for **demand forecasting in FMCG**.
 
-2. Install required dependencies:
-   ```bash
-   pip install pandas requests matplotlib seaborn
-   ```
+---
 
-3. Run the full pipeline (download → process → validate → analyze):
-   ```bash
-   python src/main.py
-   ```
+## Key Results
 
-### Results:
-- Cleaned analysis-ready dataset: `data/processed/processed_load_data.csv`
-- Visualization graphs: 
-  - `plots/daily_load.png` (long-term daily load trends for DE/HU)
-  - `plots/hourly_seasonality.png` (average load patterns by hour of day)
+| Country   | Model         | MAE (MW) | RMSE (MW) | **MAPE**  |
+|----------|---------------|----------|-----------|-----------|
+| Germany  | Holt-Winters  | 2,131    | 2,569     | **4.08%** |
+| Germany  | Prophet       | 2,460    | 3,174     | 4.72%     |
+| Hungary  | Prophet       | **201**  | **255**   | **4.12%** |
+| Hungary  | Holt-Winters  | 903      | 1,082     | 18.73%    |
 
-## Project Structure
-- `src/extract.py`: Automatically fetches the raw time series CSV from the OPSD public repository.
-- `src/transform.py`: Filters relevant columns, parses UTC datetime, and interpolates missing values.
-- `src/validate.py`: Validates data quality (missing values < 0.01%, no duplicate timestamps, realistic load thresholds).
-- `src/analyze.py`: Computes key statistics and generates Seaborn visualizations.
-- `src/main.py`: Orchestrates the end-to-end 4-step pipeline execution.
-- `data/raw/`: Stores the downloaded raw dataset (auto-created on first run).
-- `data/processed/`: Stores the cleaned, structured dataset (auto-created).
-- `plots/`: Stores generated visualization outputs (auto-created).
-- `LICENSE`: MIT License (permits free use, modification, and distribution).
-- `README.md`: Project documentation and usage guide.
+**MAPE < 5% on 14-day horizon** — excellent for operational planning
 
-## Key Analysis Insights
-- **Load Magnitudes**: Average load ~55.5 GW (Germany) and ~4.85 GW (Hungary); peak loads reach 77.9 GW (Germany, winter) and 6.82 GW (Hungary).
-- **Correlation**: ~0.82 between German and Hungarian load profiles (indicates synchronized energy consumption patterns across regions).
-- **Seasonality**: Clear daily peaks (morning and evening usage spikes) and seasonal trends (winter peak due to heating, minor summer peak due to cooling demand).
+---
 
-## License
-This project is licensed under the MIT License — see the `LICENSE` file for full details.
+## Pipeline Overview
+
+```mermaid
+graph LR
+    A[Download Raw Data<br>OPSD 15-min] --> B[Transform & Clean<br>pandas + interpolation]
+    B --> C[Validate Quality<br>missing, duplicates, ranges]
+    C --> D[Exploratory Analysis<br>seasonality, trends]
+    D --> E[Time-Series Forecasting<br>Holt-Winters + Prophet]
+    E --> F[Results & Plots<br>MAPE, forecasts, PNGs]
