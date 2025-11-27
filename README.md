@@ -43,3 +43,49 @@ graph LR
     C --> D[Exploratory Analysis<br>seasonality, trends]
     D --> E[Time-Series Forecasting<br>Holt-Winters + Prophet]
     E --> F[Results & Plots<br>MAPE, forecasts, PNGs]
+```
+
+## One command → full pipeline:
+```
+python src/main.py
+```
+
+## Features
+* Automated ETL (extract → transform → validate)
+* Two production-grade forecasting models
+   * Holt-Winters (Triple Exponential Smoothing)
+   * Facebook Prophet (with holidays & changepoints)
+* Robust data quality checks
+* Visualizations (daily trends, hourly seasonality, forecast vs actual)
+* Ready-to-deploy structure — clean, modular, documented
+
+
+## Tech Stack
+
+* Python, pandas, numpy
+* statsmodels (Holt-Winters)
+* Prophet (Facebook)
+* matplotlib, seaborn
+* Git + clean project structure
+
+## How to Run
+
+```
+git clone https://github.com/yourname/energy-load-forecasting.git
+cd energy-load-forecasting
+pip install -r requirements.txt
+python src/main.py
+```
+
+→ Downloads data → Cleans → Analyzes → Forecasts → Saves plots & metrics
+
+## Business Insights
+* Strong weekly & daily seasonality
+* Winter peaks due to heating demand
+* High correlation between Germany & Hungary (~0.82)
+* Prophet excels at capturing holidays & long-term trends
+* Holt-Winters best for stable weekly patterns
+
+## License
+
+MIT License — free to use, modify, and share.
