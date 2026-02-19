@@ -1,7 +1,7 @@
 # Electricity Load Forecasting Pipeline (Germany & Hungary)
 
 **End-to-end Time-Series Forecasting Project**  
-**Direct analogy: Demand Forecasting in FMCG (Nestlé, Unilever, P&G)**
+**Direct analogy: Demand Forecasting in FMCG**
 
 > **MAPE 4.1% on 14-day ahead forecast** — production-ready accuracy  
 > Holt-Winters + Facebook Prophet on 200,000+ hourly observations
