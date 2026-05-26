@@ -10,12 +10,6 @@
 [![pandas](https://img.shields.io/badge/pandas-2.1-green)](https://pandas.pydata.org)
 [![Prophet](https://img.shields.io/badge/Prophet-1.1-orange)](https://facebook.github.io/prophet/)
 
-## Why This Project Matters for Nestlé
-
-Nestlé's **EU-wide forecasting solutions** require:
-- Maintaining & improving existing time-series models
-- Experimenting with new forecasting approaches
-- Clear communication of results to non-technical stakeholders
 
 **This project demonstrates exactly that** — using real European grid data as a perfect proxy for **demand forecasting in FMCG**.
 
